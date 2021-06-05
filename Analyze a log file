@@ -1,0 +1,46 @@
+# BrilianK asignmentscriptpythoncourse
+
+# importing system module to get the arguments from the CMD , we use the sys module the to get the arguments from the cmd and we have 2 arguments.
+import sys
+
+# get the file name from the CMD first sys argument gets test.log file but it can be any log file 
+# open that file in read mode  we open that file in by typing the file name in the cmd , and we do it in read mode , we aonly have to go through ti no changes need ,
+R - means read mode . we can W if we want to use write command
+file_name = sys.argv[1]
+
+
+file = open(file_name, 'r')
+# split all lines ans store it in the lines list , here we create the splitted lines one by one to analyze it, i use the file.close after it performes the split and read ,
+ why do we need it open?
+lines = file.read().splitlines()
+file.close()
+
+# if condition if the action is stastics , the second sys arg is the input we have from intructions , we have 2 arguments  to proceed the analyzin process the first one being statistics
+if sys.argv[2]=='statistics':
+	n_count = 0    #notices count start at 0 because of python indexin
+	e_count = 0   #error count at 
+	for line in lines:   #we check the  for the word notice or error
+		if 'notice' in line:
+			n_count+=1 # increment to sum up all the time the notice word is mention in the log file else the error word increment
+		elif 'error' in line:
+			e_count+=1
+
+	print("errors ", e_count )      print the results of the count
+	print("notice ", n_count )
+
+# if condition if the action is error 
+if sys.argv[2]=='error':
+	# iterating through every line
+	for line in lines:
+		if 'error' in line:
+			# remove the notice [error] from the line/string
+			line = line.replace("[error]","")    we remove the usage of the word error by replacing it with nothing 
+			print(line)
+# if condition if the action is notice
+if sys.argv[2]=='notice':
+	# iterating through every line
+	for line in lines:
+		if 'notice' in line:
+			# remove the [notice] word from the line/string
+			line = line.replace("[notice]","")
+			print(line)
